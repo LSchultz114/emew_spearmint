@@ -11,6 +11,7 @@ This package requires the following:
 * Python 2.7
 * Swift-t with python enabled - http://swift-lang.org/Swift-T/
 * Spearmint with Spearmint-lite included - https://github.com/JasperSnoek/spearmint
+* EQ-Py Swift-t extension installed - see the EMEWS templates section in the EMEWS tutorial (http://www.mcs.anl.gov/~emews/tutorial/).
 
 In a folder within the python directory of the EMEWS framework (noted as `wolfe` in the provided code here), a config.json file must be placed. This is the same folder where the final results.dat file will be located when the run is complete.
 
