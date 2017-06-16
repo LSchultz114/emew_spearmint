@@ -18,8 +18,8 @@ In a folder within the python directory of the EMEWS framework (noted as `wolfe`
 ## Handshake Protocol
 `emews_spearmint` begins the handshake by inserting an empty string into its output queue, expecting the Swift-t workflow to retrieve it with an `EQPy_get` call. `emews_spearmint` then expects to receive the following initialization parameters from the Swift-t workflow (inserted with an `EQPy_put` call):
 
-* Total number of Trials (-nt): the number of iterations to perform
-* Number of Data Points (-np): the number of data points spearmint should suggest in each loop
+* **Total number of Trials (-nt):** the number of iterations to perform
+* **Number of Data Points (-np):** the number of data points spearmint should suggest in each loop
 
 The ME expects to receive these parameters respectively when it calls `IN_get()` for the first time in the following format:
 
@@ -30,7 +30,7 @@ The ME expects to receive these parameters respectively when it calls `IN_get()`
 ## Final Protocol
 The ME pushes the string "DONE" to the OUT queue to indicate that the algorithm has completed. It will subsequently push the message "Refer to results.dat file in python/wolfe directory" into the OUT queue and complete.
 
-Note: in the provided ME repository, `wolfe` is the name of the file containing the config.json file necessary for the spearmint-lite to run. This can be changed.
+**Note:** in the provided ME repository, `wolfe` is the name of the file containing the config.json file necessary for the spearmint-lite to run. This can be changed.
 
 ## Testing ME model
 
