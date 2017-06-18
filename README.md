@@ -1,4 +1,4 @@
-# A SPEARMINT-based EMEWS model exploration (ME) module
+# A Spearmint-based EMEWS model exploration (ME) module
 
 The python-based ME algorithm attempts to minimize an objective function for a parameter space defined using the Spearmint package for Bayesian optimization.
 
@@ -13,7 +13,7 @@ This package requires the following:
 * Spearmint with Spearmint-lite included - https://github.com/JasperSnoek/spearmint
 * EQ-Py Swift-t extension installed - see the EMEWS templates section in the EMEWS tutorial (http://www.mcs.anl.gov/~emews/tutorial/).
 
-In a folder within the python directory of the EMEWS framework (noted as `wolfe` in the provided code here), a config.json file must be placed. This is the same folder where the final results.dat file will be located when the run is complete.
+In a folder within the python directory of the EMEWS framework (called as `wolfe` in the provided code here), a config.json file describing the domain of the optimized parameters must be placed. For more information on the config file, please refer to the spearmint documents linked above. 
 
 ## Handshake Protocol
 `emews_spearmint` begins the handshake by inserting an empty string into its output queue, expecting the Swift-t workflow to retrieve it with an `EQPy_get` call. `emews_spearmint` then expects to receive the following initialization parameters from the Swift-t workflow (inserted with an `EQPy_put` call):
@@ -30,7 +30,7 @@ The ME expects to receive these parameters respectively when it calls `IN_get()`
 ## Final Protocol
 The ME pushes the string "DONE" to the OUT queue to indicate that the algorithm has completed. It will subsequently push the message "Refer to results.dat file in python/wolfe directory" into the OUT queue and complete.
 
-**Note:** in the provided ME repository, `wolfe` is the name of the file containing the config.json file necessary for the spearmint-lite to run. This can be changed.
+**Note:** in the provided ME repository, `wolfe` is the name of the file containing the config.json file necessary for the spearmint-lite to run as well as where the final results file will be placed. This can be changed.
 
 ## Testing ME model
 
