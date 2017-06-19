@@ -13,7 +13,8 @@ This package requires the following:
 * Spearmint with Spearmint-lite included - https://github.com/JasperSnoek/spearmint
 * EQ-Py Swift-t extension installed - see the EMEWS templates section in the EMEWS tutorial (http://www.mcs.anl.gov/~emews/tutorial/).
 
-In a folder within the python directory of the EMEWS framework (called as `wolfe` in the provided code here), a config.json file describing the domain of the optimized parameters must be placed. For more information on the config file, please refer to the spearmint documents linked above. 
+In a folder within the python directory of the EMEWS framework, an experiment file is expected. Within the provided code in this repositiory, that experiment file is named as 'wolfe'. This file must only contain a 'config.json' file describing the domain of the optimized parameters. For more information on the config file, please refer to the spearmint documents linked above. 
+
 
 ## Handshake Protocol
 `emews_spearmint` begins the handshake by inserting an empty string into its output queue, expecting the Swift-t workflow to retrieve it with an `EQPy_get` call. `emews_spearmint` then expects to receive the following initialization parameters from the Swift-t workflow (inserted with an `EQPy_put` call):
@@ -30,8 +31,13 @@ The ME expects to receive these parameters respectively when it calls `IN_get()`
 ## Final Protocol
 The ME pushes the string "DONE" to the OUT queue to indicate that the algorithm has completed. It will subsequently push the message "Refer to results.dat file in python/wolfe directory" into the OUT queue and complete.
 
-**Note:** in the provided ME repository, `wolfe` is the name of the file containing the config.json file necessary for the spearmint-lite to run as well as where the final results file will be placed. This can be changed.
+**Note:** in the provided ME repository, 'wolfe' is the name of the experiment file under the 'python' directory where the final results file will be placed.
 
+
+## Results
+The results of this ME code will be placed in a 'results.dat' file located in the experiment file--named 'wolfe' in this provided code. The results.dat will contain a white-space delimited line for each experiment, of the format: `<result> <time-taken> <list of parameters in the same order as config.json>`
+ 
+ 
 ## Testing ME model
 
 The `test` directory contains a test (`test.py`) for `emews_spearmint` that runs the ME algorithm with python and eqpy (included in the `test` directory), but without Swift/T. To run the test, run the `run_test.sh` bash script in the test directory.
