@@ -13,7 +13,7 @@ This package requires the following:
 * Spearmint with Spearmint-lite included - https://github.com/JasperSnoek/spearmint
 * EQ-Py Swift-t extension installed - see the EMEWS templates section in the EMEWS tutorial (http://www.mcs.anl.gov/~emews/tutorial/).
 
-For spearmint to run, a json configuration file describing the domain of the optimized parameters is expected. Within the provided code in this repositiory, this file is expected to reside in the 'data' folder within the EMEWS structure file. For more information on the config file, please refer to the spearmint documents linked above. 
+For spearmint to run, a json configuration file (`config.json`) describing the domain of the optimized parameters is expected. Within the provided code in this repositiory, this file is expected to reside in the `data` folder within the EMEWS structure file. For more information on the config file, please refer to the spearmint documents linked above. 
 
 
 ## Handshake Protocol
@@ -33,7 +33,7 @@ The ME pushes the string "DONE" to the OUT queue to indicate that the algorithm 
 
 
 ## Results
-The results of this ME code will be placed in a 'results.dat' file located in the EMEWS data directory. The results.dat will contain a white-space delimited line for each experiment, of the format: `<result> <time-taken> <list of parameters in the same order as config.json>`
+The results of this ME code will be placed in a `results.dat` file located in the EMEWS `data` directory. The `results.dat` will contain a white-space delimited line for each experiment, of the format: `<result> <time-taken> <list of parameters in the same order as config.json>`
  
  
 ## Testing ME model
