@@ -226,9 +226,7 @@ def main_controller(options, args):
         outfile = open(res_file,"a")
         outfile.write(output)
         outfile.close()
-
-    # Send out the pending list of data to be modeled
-    eqpy.OUT_put(queue)
+	return queue
 ####################################################################################################
 ####################################################################################################
 ##
@@ -243,16 +241,12 @@ def run():
     (num_trials, num_points) = eval('{}'.format(initparams))
     # going to have to run 1 more than number of requested loops to record the final loop's returned data points
     loops = num_trials + 1
-    # first run of the model has no inputs --create our first data points
-    print("running loop number 1 of %d" % num_trials)
-    main_controller({'config_file': 'config.json', 'grid_size':20000,'max_finished_jobs':1000,'chooser_args':"", 'results_file': 'results.dat', 'num_jobs':num_points, 'chooser_module': 'GPEIOptChooser1', 'grid_seed': 1},[''])
-    # Run through the Simulator->Swift->Simulator initparams-more times
-    for i in range(1,loops):
-       params = eqpy.IN_get()
-       expt_dir  = os.getcwd()
-       home_dir = os.path.join(os.path.split(expt_dir)[0],'data')
-       # if we got a string of results, we need to put it into the shared file
-       if isinstance(params,str):
+    for i in range(0,loops):
+       if i>0:
+           params = eqpy.IN_get()
+           expt_dir  = os.getcwd()
+           home_dir = os.path.join(os.path.split(expt_dir)[0],'data')
+           # received string of results, need to put it into the shared file
            params = params.split(";")
            res_file = os.path.join(home_dir,'results.dat')
            resfile = open(res_file,'a+')
@@ -279,8 +273,9 @@ def run():
        #if we have met all the required loops, we want to fill in the final set but not run the Simulator again
        if i<num_trials:
             print("running loop number %d of %d" % (i+1,num_trials))
-            main_controller({'config_file': 'config.json', 'grid_size':20000,'max_finished_jobs':1000,'chooser_args':"", 'results_file': 'results.dat', 'num_jobs': num_points, 'chooser_module': 'GPEIOptChooser1', 'grid_seed': 1},[''])
-
+            queue= main_controller({'config_file': 'config.json', 'grid_size':20000,'max_finished_jobs':1000,'chooser_args':"", 'results_file': 'results.dat', 'num_jobs': num_points, 'chooser_module': 'GPEIOptChooser1', 'grid_seed': 1},[''])
+ 	    # Send out the pending list of data to be modeled
+            eqpy.OUT_put(queue)
     #finished all of the loops, let EMEWS know to stop
     eqpy.OUT_put("DONE")
     #let the user know where to look for the results of this EMEWS project
