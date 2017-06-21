@@ -10,7 +10,6 @@ Practical Bayesian Optimization of Machine Learning Algorithms
 Jasper Snoek, Hugo Larochelle and Ryan P. Adams
 Advances in Neural Information Processing Systems, 2012
 
-Spearmint is the result of a collaboration primarily between machine learning researchers at Harvard University and the University of Toronto.
 
 The python-based ME algorithm models a complex simulator or learning algorithm's performance (output) as a sample from a Gassian Process (GP). The model's hyperparameters are then varied and, based upon the acquisition function chosen, a single Bayesian optimization is run to determine the next best set of data points for evaluation. Each subsequent run of the algorithm then leverages the previous data points and their evaluations. 
 
