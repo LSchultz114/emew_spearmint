@@ -61,7 +61,7 @@ def main():
 
     # load the history file for testing purposes
     # typically a swift script wouldn't do anything with this
-    home_dir = os.path.join(os.path.split(os.getcwd())[0],'python','wolfe')
+    home_dir = os.path.join(os.path.split(os.getcwd())[0],'data')
     res_file = os.path.join(home_dir,'results.dat')
     with open(res_file,'a+') as f_in:
         history = f_in.readlines()
