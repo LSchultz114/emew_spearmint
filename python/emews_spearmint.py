@@ -35,7 +35,6 @@ import collections
 import importlib
 import sys
 import eqpy
-import re
 
 from ExperimentGrid1  import *
 try: import simplejson as json
@@ -226,7 +225,7 @@ def main_controller(options, args):
         outfile = open(res_file,"a")
         outfile.write(output)
         outfile.close()
-	return queue
+    return queue
 ####################################################################################################
 ####################################################################################################
 ##
