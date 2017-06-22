@@ -15,6 +15,12 @@ def obj(pos):
     return ((pos[0]-5)**2 + (pos[1]-5)**2)
 
 def main():
+    home_dir = os.path.join(os.path.split(os.getcwd())[0],'data')
+    res_file = os.path.join(home_dir,'results.dat')
+    if os.path.exists(res_file):
+       thefile = open(res_file, 'w')
+       thefile.write("")
+       thefile.close()
     # initialize spearmint for emews
     eqpy.init("emews_spearmint")
     # get the handshake -- empty string
@@ -39,20 +45,15 @@ def main():
             params = [x.split() for x in params_string.split(';')] 
 	    #replace the first item with the objective function, which uses the first 2 x values
 	    #replace second item with '0' to match output of the chosen chooser module
+	    queue=""
             for x in range(0,len(params)):
                 input = [float(z) for z in params[x][2:4]]
-		print(input)
-		params[x][0] = obj(input)
-                params[x][1] = '0'
-	    queue = ""
-	    for p in params[0]:
-    		queue = queue + str(p) + " "
-	    for m in range(1,len(params)):
-	        output = ""
-	        for p in params[m]:
-       		     output = output + str(p) + " "
-		queue=queue + ";" + output
-	    print(queue)
+		if x==0:
+		   queue = queue + str(obj(input)) + ' 0 '
+		else:
+		   queue = queue + ';' + str(obj(input)) + ' 0 '
+		for p in params[x]:
+		   queue = queue + str(p) + " "
             # pass the results from the objective function (queue) back to spearmint
             eqpy.input_q.put(queue)
 
@@ -65,9 +66,8 @@ def main():
     res_file = os.path.join(home_dir,'results.dat')
     with open(res_file,'a+') as f_in:
         history = f_in.readlines()
-        print(history[0])
-        assert history[0] == '50.0 0 0.0 0.0 0.0 0.0 0.0 0.0  0.0 0.0 \n'
-        print("PASSED")
+    assert history[0] == '50.0 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0  \n'
+    print("PASSED")
 
 if __name__ == '__main__':
     main()
