@@ -35,6 +35,7 @@ import collections
 import importlib
 import sys
 import eqpy
+import re
 
 from ExperimentGrid1  import *
 try: import simplejson as json
@@ -247,10 +248,10 @@ def run():
            home_dir = os.path.join(os.path.split(expt_dir)[0],'data')
            # received string of results, need to put it into the shared file
            params = params.split(";")
-           res_file = os.path.join(home_dir,'results.dat')
-           resfile = open(res_file,'a+')
-           temp = resfile.readlines()
-           resfile.close()
+           mas_file = os.path.join(home_dir,'results.dat')
+           masfile = open(mas_file,'r')
+           temp = masfile.readlines()
+           masfile.close()
            for b in range(0,len(params)):
                # solved data set  comes in form "answer 0 X-values; answer 0 X-values..."
                # split these up to replace each one in our shared file
@@ -264,9 +265,9 @@ def run():
                temp= [w.replace(str(X[0]),params[b]) for w in temp]
 
            #update the file with the newly entered solved pieces
-           resfile=open(res_file,'w')
-           resfile.writelines(temp)
-           resfile.close()
+           masfile=open(mas_file,'w')
+           masfile.writelines(temp)
+           masfile.close()
 
        #if we haven't met all of the required loops, we run the Simulator
        #if we have met all the required loops, we want to fill in the final set but not run the Simulator again
