@@ -64,7 +64,7 @@ def main():
     # typically a swift script wouldn't do anything with this
     home_dir = os.path.join(os.path.split(os.getcwd())[0],'data')
     res_file = os.path.join(home_dir,'results.dat')
-    with open(res_file,'a+') as f_in:
+    with open(res_file,'r') as f_in:
         history = f_in.readlines()
     assert history[0] == '50.0 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0  \n'
     print("PASSED")
