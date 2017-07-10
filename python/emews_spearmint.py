@@ -219,7 +219,7 @@ def main_controller(options, args):
             output = output + str(p) + " "
         if i == 0:
            queue = queue + output
-	else: 
+        else: 
            queue = queue + ';' + output
 
         output = "P P " + output + "\n"
@@ -274,7 +274,7 @@ def run():
        if i<num_trials:
             print("running loop number %d of %d" % (i+1,num_trials))
             queue= main_controller({'config_file': 'config.json', 'grid_size':20000,'max_finished_jobs':1000,'chooser_args':"", 'results_file': 'results.dat', 'num_jobs': num_points, 'chooser_module': 'GPEIOptChooser1', 'grid_seed': 1},[''])
- 	    # Send out the pending list of data to be modeled
+            # Send out the pending list of data to be modeled
             eqpy.OUT_put(queue)
     #finished all of the loops, let EMEWS know to stop
     eqpy.OUT_put("DONE")
