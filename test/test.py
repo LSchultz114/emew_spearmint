@@ -9,14 +9,16 @@
 from __future__ import print_function
 import eqpy
 import os
+import sys
 
 # the objective function -- equivalent to swift running a model / application
 def obj(pos):
     return ((pos[0]-5)**2 + (pos[1]-5)**2)
 
 def main():
-    home_dir = os.path.join(os.path.split(os.getcwd())[0],'data')
-    res_file = os.path.join(home_dir,'results.dat')
+    home_dir = os.path.abspath(os.path.join(os.getcwd(),os.pardir,os.pardir))
+    data_dir = os.path.join(home_dir,'data')
+    res_file = os.path.join(data_dir,'results.dat')
     if os.path.exists(res_file):
        thefile = open(res_file, 'w')
        thefile.write("")
@@ -62,12 +64,11 @@ def main():
 
     # load the history file for testing purposes
     # typically a swift script wouldn't do anything with this
-    home_dir = os.path.join(os.path.split(os.getcwd())[0],'data')
-    res_file = os.path.join(home_dir,'results.dat')
     with open(res_file,'r') as f_in:
         history = f_in.readlines()
     assert history[0] == '50.0 0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0  \n'
     print("PASSED")
 
 if __name__ == '__main__':
+    print(sys.argv[0])
     main()
