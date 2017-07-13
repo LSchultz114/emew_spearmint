@@ -1,5 +1,4 @@
 #! /usr/bin/env bash
-
-SPEAR_ROOT=$( cd $( dirname $0 )/../.. ; /bin/pwd )
-export PYTHONPATH=$SPEAR_ROOT/python:$SPEAR_ROOT/ext/EQ-Py
-python $SPEAR_ROOT/python/test/test.py
+export EMEWS_PROJECT_ROOT=$( cd $( dirname $0 )/../.. ; /bin/pwd )
+export PYTHONPATH=$EMEWS_PROJECT_ROOT/python:$EMEWS_PROJECT_ROOT/ext/EQ-Py
+python $EMEWS_PROJECT_ROOT/python/test/test.py
