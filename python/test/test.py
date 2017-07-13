@@ -9,6 +9,7 @@
 from __future__ import print_function
 import eqpy
 import os
+import sys
 
 # the objective function -- equivalent to swift running a model / application
 def obj(pos):
@@ -44,17 +45,17 @@ def main():
             # convert the parameter string into a list of lists where the
             # nested list are the parameter sets
             params = [x.split() for x in params_string.split(';')] 
-        #replace the first item with the objective function, which uses the first 2 x values
-        #replace second item with '0' to match output of the chosen chooser module
-            queue=""
+	    #replace the first item with the objective function, which uses the first 2 x values
+	    #replace second item with '0' to match output of the chosen chooser module
+	    queue=""
             for x in range(0,len(params)):
                 input = [float(z) for z in params[x][2:4]]
-                if x==0:
-                  queue = queue + str(obj(input)) + ' 0 '
-                else:
-                  queue = queue + ';' + str(obj(input)) + ' 0 '
-                for p in params[x]:
-                  queue = queue + str(p) + " "
+		if x==0:
+		   queue = queue + str(obj(input)) + ' 0 '
+		else:
+		   queue = queue + ';' + str(obj(input)) + ' 0 '
+		for p in params[x]:
+		   queue = queue + str(p) + " "
             # pass the results from the objective function (queue) back to spearmint
             eqpy.input_q.put(queue)
 
@@ -69,4 +70,5 @@ def main():
     print("PASSED")
 
 if __name__ == '__main__':
+    print(sys.argv[0])
     main()
