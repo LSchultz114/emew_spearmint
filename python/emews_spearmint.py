@@ -95,10 +95,10 @@ def main():
 def main_controller(options, args):
     # set up all the working directories
     queue=""
-    expt_dir  = os.path.realpath(args[0])
+    expt_dir = os.environ['EMEWS_PROJECT_ROOT'];
     work_dir  = os.path.realpath('.')
     expt_name = os.path.basename(expt_dir)
-    home_dir = os.path.join(os.path.split(expt_dir)[0],'data')
+    home_dir = os.path.join(expt_dir,'data')
 
     if not os.path.exists(expt_dir):
         sys.stderr.write("Cannot find experiment directory '%s'.  Aborting.\n" % (expt_dir))
@@ -219,7 +219,7 @@ def main_controller(options, args):
             output = output + str(p) + " "
         if i == 0:
            queue = queue + output
-        else: 
+	else: 
            queue = queue + ';' + output
 
         output = "P P " + output + "\n"
@@ -244,8 +244,8 @@ def run():
     for i in range(0,loops):
        if i>0:
            params = eqpy.IN_get()
-           expt_dir  = os.getcwd()
-           home_dir = os.path.join(os.path.split(expt_dir)[0],'data')
+           expt_dir = os.environ['EMEWS_PROJECT_ROOT'];
+           home_dir = os.path.join(expt_dir,'data')
            # received string of results, need to put it into the shared file
            params = params.split(";")
            mas_file = os.path.join(home_dir,'results.dat')
@@ -274,7 +274,7 @@ def run():
        if i<num_trials:
             print("running loop number %d of %d" % (i+1,num_trials))
             queue= main_controller({'config_file': 'config.json', 'grid_size':20000,'max_finished_jobs':1000,'chooser_args':"", 'results_file': 'results.dat', 'num_jobs': num_points, 'chooser_module': 'GPEIOptChooser1', 'grid_seed': 1},[''])
-            # Send out the pending list of data to be modeled
+ 	    # Send out the pending list of data to be modeled
             eqpy.OUT_put(queue)
     #finished all of the loops, let EMEWS know to stop
     eqpy.OUT_put("DONE")
