@@ -70,7 +70,9 @@ This package requires the following:
 
 ## Assumptions
 
-The provided code in this repository contains the following assumptions, which can be changed via the `run` function's `main()` call arguments: 
+The provided code in this repository contains the following assumptions, which can be changed via the `run` function's arguments to the `main_controller()` method: 
 
-* The `method` argument specifies the chooser module (acquisition function) as the `GPEIOptChooser`, which first samples from a dense grid on the unit hypercube and then the best candidates are optimized via Expected Improvement
+* The `method` argument specifies the chooser module (acquisition function) as the `GPEIOptChooser1`, which first samples from a dense grid on the unit hypercube and then the best candidates are optimized via Expected Improvement
 * The `method-args` argument is left blank, which means we are assuming that the function of interest is not deterministic (i.e. contains noise)
+
+For further details, refer to the Spearmint README file: https://github.com/JasperSnoek/spearmint
